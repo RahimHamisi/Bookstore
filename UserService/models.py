@@ -14,10 +14,10 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     profile_picture=models.ImageField(upload_to='profile_pictures',blank=True)
-    bio=models.TextField()
+    bio=models.TextField(blank=True)
     address=models.TextField(null=True,blank=True)
     phone_number=models.CharField(max_length=20,null=True,blank=True)
-    preference=models.ManyToManyField("BookService.Genre",blank=True,null=True)
+   
 
 
     def __str__(self) -> str:
