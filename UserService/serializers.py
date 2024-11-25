@@ -18,7 +18,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'phone_number', 'address','birth_date','age']
        
 
-
         def calculate_age(self,obj):
             if obj.birth_date is not None:
                 today = date.today()
