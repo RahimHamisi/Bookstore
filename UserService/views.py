@@ -1,16 +1,16 @@
-from django.http import HttpResponse
-from rest_framework.mixins import CreateModelMixin,  RetrieveModelMixin, UpdateModelMixin
-from rest_framework.viewsets import GenericViewSet
+from django.http import HttpResponse # type: ignore
+from rest_framework.mixins import CreateModelMixin,  RetrieveModelMixin, UpdateModelMixin # type: ignore
+from rest_framework.viewsets import GenericViewSet # type: ignore
 
-from .serializers import UserProfileSerializer
+from .serializers import UserCreateSerializer
 
-from .models import UserProfile
+from .models import User
 
 
 # Create your views here.
 
 
 
-class ProfileViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
-    queryset = UserProfile.objects.all()
-    serializer_class=UserProfileSerializer
+class UserViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
+    queryset = User.objects.all()
+    serializer_class=UserCreateSerializer

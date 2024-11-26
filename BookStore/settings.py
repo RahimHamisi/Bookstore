@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y+mmgak!2=v=8-uxzn)tv%y8&dlx@r^*fo$tzzizey-cisg+hv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -147,6 +147,6 @@ SIMPLE_JWT = {
 
 DJOSER={
     'SERIALIZERS':{
-        'user_create': 'UserService.serializers.UserProfileSerializer',
+        'user_create': 'UserService.serializers.UserCreateSerializer',
     }
 }

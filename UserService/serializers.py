@@ -1,16 +1,16 @@
 from datetime import date
-from rest_framework import serializers
+from rest_framework import serializers # type: ignore
 from .models import User, UserProfile
-from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer # type: ignore
 
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ['id', 'username', 'email','date_joined','first_name','last_name','password']
+        fields = ['id', 'username', 'email','date_joined','password']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     age=serializers.SerializerMethodField(method_name="calculate_age")
-    user=UserCreateSerializer()
+    user=UserCreateSerializer
     
 
     class Meta:
