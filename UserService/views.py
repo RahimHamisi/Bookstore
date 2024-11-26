@@ -11,6 +11,6 @@ from .models import User
 
 
 
-class UserViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
-    queryset = User.objects.all()
-    serializer_class=UserCreateSerializer
+# class UserViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
+#     queryset = User.objects.all()
+#     serializer_class=UserCreateSerializer
