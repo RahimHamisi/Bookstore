@@ -23,5 +23,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
                 today = date.today()
                 age=today.year-obj.birth_date.year
                 return age
-            return None #Return None if no birth_date provided
+            return None 
                 
