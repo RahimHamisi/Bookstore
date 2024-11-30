@@ -7,6 +7,7 @@ from BookService import views
 router=routers.DefaultRouter()
 router.register(r'books',views.BookViewSet,basename='books')
 urlpatterns=[
-    path("api/",include(router.urls)),
+    path("",include(router.urls)),
+
    
 ]

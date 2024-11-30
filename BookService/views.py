@@ -28,7 +28,7 @@ class BookViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset=Book.objects.all()
         serializer = BookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({"bo0k-stock":serializer.data})
  
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])

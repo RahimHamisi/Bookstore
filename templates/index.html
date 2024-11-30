@@ -1,0 +1,18 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>kill -9 12345
+
+    <h1 style="text-align: center;"> My OAuth Project </h1>
+    {% if user.is_authenticated %}
+    <p>Welcome. You are logged in as {{user.username}} </p>
+    {% else %}
+    <a href=http://127.0.0.1:8000/accounts/google/login/>Login with Google</a>
+    <a href="http://127.0.0.1:8000/accounts/github/login/">Login with GitHub</a>
+    {% endif %}
+</body>
+</html>
