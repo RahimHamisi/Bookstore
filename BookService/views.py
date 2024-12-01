@@ -19,11 +19,13 @@ class BookViewSet(ReadOnlyModelViewSet):
 
 class CollectionViewSet(ViewSet):
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
-    def add_to_collection(self, request, pk):
-        book = get_object_or_404(Book,id=pk)  
+    def add_to_collection(self, request):
+        book = get_object_or_404(Book,id=id)  
+        print(book.id)
         serializer = CollectionSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             collection = serializer.save() 
+            print(collection)
             return Response({
                 'message': 'Book added to collection successfully',
                 'collection_name': collection.name,

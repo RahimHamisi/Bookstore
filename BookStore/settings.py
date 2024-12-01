@@ -172,7 +172,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'offline',
+            'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
     },
@@ -186,7 +186,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 SITE_ID=1
 
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/api/book/v1/books/'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/api/bookservice/books/'
 LOGOUT_REDIRECT_URL = '/'
 
 

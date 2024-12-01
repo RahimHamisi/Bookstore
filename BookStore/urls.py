@@ -19,8 +19,8 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/v1/',include("UserService.urls")),
-    path('api/book/v1/',include("BookService.urls")),
+    path('api/userservice/',include("UserService.urls")),
+    path('api/bookservice/',include("BookService.urls")),
     path('accounts/', include('allauth.urls')),
     path('m/', TemplateView.as_view(template_name='index.html')),
 

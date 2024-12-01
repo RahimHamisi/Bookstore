@@ -24,13 +24,6 @@ class CollectionSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'user': {'read_only': True}  
         }
-    def validate(self, data):
-            user = self.context['request'].user
-            collection = Collection.objects.filter(user=user, name=data['collection_name']).first()
-            if not collection:
-                raise serializers.ValidationError("Collection with this name doesn't exist.")
-            data['collection'] = collection
-            return data
 
     def save(self):
         book = Book.objects.get(id=self.validated_data['book_id'])
