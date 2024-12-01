@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from BookService.models import Book,Collection, Genre
+from django.conf import settings
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,6 +16,7 @@ class BookSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     genre=GenreSerializer()
     book=BookSerializer(many=True)
+    user=settings.AUTH_USER_MODEL
     
     class Meta:
         model=Collection

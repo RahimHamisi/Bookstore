@@ -1,39 +1,26 @@
 import pprint
 import requests
-from rest_framework import viewsets
+from rest_framework.viewsets import ReadOnlyModelViewSet,ViewSet
 from .models import Book,Collection
 from django.shortcuts import get_object_or_404
 from .serializers import BookSerializer,CollectionSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework import status
-from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
 
 
-class BookCollectionView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        collections = Collection.objects.filter(user=request.user)
-        serializer = CollectionSerializer(collections, many=True)
-        return Response(serializer.data)
-    
-
-
-
-class BookViewSet(viewsets.ViewSet):
+class BookViewSet(ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
-    def list(self, request):
-        queryset=Book.objects.all()
-        serializer = BookSerializer(queryset, many=True)
-        return Response({"bo0k-stock":serializer.data})
- 
+    queryset=Book.objects.all()
+    serializer_class=BookSerializer
 
+
+class CollectionViewSet(ViewSet):
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
-    def add_to_collection(self, request, id=None):
-        book = Book.objects.get(pk=id)  
+    def add_to_collection(self, request, pk):
+        book = get_object_or_404(Book,id=pk)  
         serializer = CollectionSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             collection = serializer.save() 
@@ -47,7 +34,6 @@ class BookViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def view_collection(self, request):
-        user = request.user
-        collections = Collection.objects.filter(user=user)
+        collections = Collection.objects.filter( user = request.user)
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
