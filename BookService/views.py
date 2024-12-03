@@ -1,9 +1,9 @@
 import pprint
 import requests
-from rest_framework.viewsets import ReadOnlyModelViewSet,ViewSet
-from .models import Book,Collection
+from rest_framework.viewsets import ReadOnlyModelViewSet,ViewSet, ModelViewSet
+from .models import Book,Collection, Genre
 from django.shortcuts import get_object_or_404
-from .serializers import BookSerializer,CollectionSerializer
+from .serializers import BookSerializer,CollectionSerializer, GenreSerializer, CollectionSerializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
@@ -39,3 +39,18 @@ class CollectionViewSet(ViewSet):
         collections = Collection.objects.filter( user = request.user)
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
+
+
+class GenreViewSet(ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
+class AddToCollectionViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class=CollectionSerializers
+
+    #filter to get user's collections
+    def get_queryset(self):
+        user = self.request.user
+        return Collection.objects.filter(user = user)    
