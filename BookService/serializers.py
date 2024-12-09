@@ -36,7 +36,6 @@ class CollectionSerializer(serializers.ModelSerializer):
 class CollectionSerializers(serializers.ModelSerializer):
     genre=GenreSerializer()
     book=BookSerializer(many = True)
-    user=settings.AUTH_USER_MODEL
     
     class Meta:
         model=Collection
@@ -66,7 +65,6 @@ class CollectionSerializers(serializers.ModelSerializer):
 
 #this is for creating a new collection with an existing book and an existing genre
 class CollectionSerializer1(serializers.ModelSerializer):
-    user=settings.AUTH_USER_MODEL
     class Meta:
         model =Collection
         fields=['id','name','genre','book','user']

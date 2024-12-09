@@ -3,7 +3,7 @@ import requests
 from rest_framework.viewsets import ReadOnlyModelViewSet,ViewSet, ModelViewSet
 from .models import Book,Collection, Genre
 from django.shortcuts import get_object_or_404
-from .serializers import BookSerializer,CollectionSerializer, GenreSerializer, CollectionSerializers
+from .serializers import BookSerializer,CollectionSerializer, GenreSerializer, CollectionSerializers, CollectionSerializer1
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
@@ -48,9 +48,13 @@ class GenreViewSet(ModelViewSet):
 
 class AddToCollectionViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
-    serializer_class=CollectionSerializers
+    serializer_class=CollectionSerializer1
 
     #filter to get user's collections
     def get_queryset(self):
         user = self.request.user
-        return Collection.objects.filter(user = user)    
+        return Collection.objects.filter(user = user)
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+        return serializer.data   
